@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->foreignId('destination_id')->nullable()->index();
-            $table->string('comment');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('destination_id')->constrained();
+            $table->text('comment');
             $table->timestamps();
             $table->smallInteger('rating');
         });

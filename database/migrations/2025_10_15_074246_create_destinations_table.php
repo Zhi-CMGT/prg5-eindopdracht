@@ -12,10 +12,10 @@ return new class extends Migration {
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->nullable()->index();
+            $table->foreignId('category_id')->constrained();
             $table->string('name');
             $table->string('location');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }
