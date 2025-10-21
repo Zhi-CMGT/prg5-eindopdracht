@@ -1,16 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        Begin je avontuur in ZheJiang!
+        <a href="{{ route('destinations') }}">Explore</a>
     </x-slot>
     <div>
-        <p>Stap in de wereld van ZheJiang, een provincie vol contrasten waar eeuwenoude tradities en moderne energie
-            samenkomen. Dwaal door oude waterstadjes, beklim mistige bergen en proef de smaken van authentieke Chinese
-            gerechten die je nergens anders vindt.</p>
-        <p>Met onze uitgebreide gids navigeer je eenvoudig door de steden van ZheJiang en ontdek je plekken per
-            categorie -
-            van verborgen natuurpaden tot bruisende markten. Elk bezoek vertelt een nieuw verhaal.</p>
-        <p>Laat je inspireren door de ervaringen van andere ontdekkingsreizigers, of deel je eigen avonturen en tips.
-            Want
-            in ZheJiang is elke reis uniek - en jouw verhaal hoort erbij.</p>
+        <p>Step into the world of Zhejiang, a province full of contrasts where centuries-old traditions meet modern
+            energy. Wander through ancient water towns, climb misty mountains, and savor the flavors of authentic
+            Chinese cuisine found nowhere else.</p>
+        <p>With our comprehensive guide, you can easily navigate the cities of Zhejiang and discover places by category
+            – from hidden nature trails to bustling markets. Each visit tells a new story.</p>
+        <p>Be inspired by the experiences of other explorers, or share your own adventures and tips. In Zhejiang, every
+            journey is unique – and your story belongs here too.</p>
     </div>
 </x-app-layout>

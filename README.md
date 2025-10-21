@@ -1,6 +1,6 @@
 21-10-2025
 Uitwerken van de categories-pagina
--View van de categories (categories/index.blade + database)
+-View van de categories (categories/index.blade + show.blade + database)
 -linken van de categories-destinations
 
 20-10-2025
@@ -33,7 +33,7 @@ Hoofdpagina-overzicht
 
 13-10-2025
 -ERD ChinaTravel
-
+![img.png](img.png)
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 

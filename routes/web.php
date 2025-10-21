@@ -20,21 +20,20 @@ Route::get('destinations/create', [DestinationsController::class, 'create'])->na
 
 //show
 Route::get('destinations/{destination}', [DestinationsController::class, 'show'])->name('destinations.show');
+Route::get('categories/{category}', [CategoriesController::class, 'show'])->name('categories.show');
 
 //store
 Route::post('destinations', [DestinationsController::class, 'store'])->name('destinations.store');
 Route::post('categories', [CategoriesController::class, 'store'])->name('categories.store');
 
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-//Route::middleware('auth')->group(function () {
-//    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-//});
-
-//Route::resource('destinations', DestinationsController::class);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 require __DIR__ . '/auth.php';

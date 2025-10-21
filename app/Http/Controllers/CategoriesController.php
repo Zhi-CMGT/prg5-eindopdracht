@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
 use App\Models\Category;
+use App\Models\Destination;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -24,6 +24,7 @@ class CategoriesController extends Controller
     {
         $categories = Category::all();
         return view('categories.index', compact('categories'));
+
     }
 
     /**
@@ -70,7 +71,7 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categories $categories)
+    public function update(Request $request, Category $categories)
     {
         //
     }
@@ -78,7 +79,7 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categories $categories)
+    public function destroy(Category $categories)
     {
         //
     }

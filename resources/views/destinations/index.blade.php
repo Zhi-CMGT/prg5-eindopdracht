@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <x-slot name="header">
-        Destinations
+        "Find your next stop in ZheJiang."
     </x-slot>
 
     <div>
