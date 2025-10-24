@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form action="{{ route('destinations.store') }}" method="post">
+    <form action="{{ route('categories.store') }}" method="post">
         @csrf
         <div>
             <label for="">Name: </label>
@@ -10,26 +10,6 @@
             @error('name')
             <div class="alert alert-danger"> {{ $message }}</div>
             @enderror
-        </div>
-
-        <div>
-            <label for="">Coordinate: </label>
-            <input type="text" name="coordinate" id="coordinate">
-
-            <input type="submit" name="submit" value="{{old('coordinate')}}">
-
-            @error('coordinate')
-            <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
-        </div>
-
-        <div>
-            <p>Category: </p>
-            <select name="category_id" id="category_id">
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
         </div>
 
         <div>

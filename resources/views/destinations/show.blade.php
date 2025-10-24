@@ -6,7 +6,7 @@
 
     <div>
         <div>
-            <p><strong>Location: </strong>{{$destination->location}}</p>
+            <p><strong>Location: </strong>{{$destination->coordinate}}</p>
             <p><strong>Description: </strong>{{$destination->description}}</p>
             <p><strong>Category: </strong>{{$destination->category->name}}</p>
             <a href="{{ url()->previous() }}">Go Back</a>
@@ -22,6 +22,9 @@
         </div>
         <div>
             <h2></h2>
+            @foreach($destination->reviews as $review)
+                <p>{{$review->comment}}</p>
+            @endforeach
             <p></p>
         </div>
 

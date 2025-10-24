@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DestinationsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,16 +16,18 @@ Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::get('destinations', [DestinationsController::class, 'index'])->name('destinations');
 Route::get('categories', [CategoriesController::class, 'index'])->name('categories');
 
-//create
+//destinations create, show and store
 Route::get('destinations/create', [DestinationsController::class, 'create'])->name('destinations.create');
-
-//show
 Route::get('destinations/{destination}', [DestinationsController::class, 'show'])->name('destinations.show');
-Route::get('categories/{category}', [CategoriesController::class, 'show'])->name('categories.show');
-
-//store
 Route::post('destinations', [DestinationsController::class, 'store'])->name('destinations.store');
+
+//categories create, show and store
+Route::get('categories/create', [CategoriesController::class, 'create'])->name('categories.create');
+Route::get('categories/{category}', [CategoriesController::class, 'show'])->name('categories.show');
 Route::post('categories', [CategoriesController::class, 'store'])->name('categories.store');
+
+//reviews create, show and store
+Route::get('review/{review}', [ReviewsController::class, 'show'])->name('reviews.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -8,7 +8,7 @@
         @foreach($destinations as $destination)
             <div>
                 <h1>{{$destination->name}}</h1>
-                <p>{{$destination->location}}</p>
+                <p>Coordinate: <br>{{$destination->coordinate}}</p>
                 <p>{{$destination->description}}</p>
             </div>
             <div>

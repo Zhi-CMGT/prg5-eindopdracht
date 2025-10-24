@@ -1,3 +1,15 @@
+23-10-2025
+Uitwerken van de destinations-pagina
+-form(destinations/create.blade)
+
+Uitwerken van de categories-pagina
+-form(categories/create.blade)
+
+Uitwerken van de info
+
+Uitwerken van de reviews-pagina
+-reviews/create.blade
+
 21-10-2025
 Uitwerken van de categories-pagina
 -View van de categories (categories/index.blade + show.blade + database)

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Destination;
+use App\Models\Review;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\DocBlock\Description;
 
 class DestinationsController extends Controller
 {
@@ -29,7 +30,9 @@ class DestinationsController extends Controller
      */
     public function create()
     {
-        return view('destinations.create');
+        $categories = Category::all();
+        $reviews = Review::all();
+        return view('destinations.create', compact('categories'));
     }
 
     /**
@@ -40,19 +43,20 @@ class DestinationsController extends Controller
         //validatie
         $request->validate([
             'name' => 'required|max:100',
-            'description' => 'required'
+            'description' => 'required',
+            'coordinate' => 'required',
         ]);
         //errors tonen
         //beveiliging
         //data terugschrijven in de form fields
         //INSERT INTO sql
-        $description = new Description();
-        $description->name = $request->input('name');
-        $description->description = $request->input('description');
-        $description->location = $request->input('location');
-        $description->category_id = 1;
+        $destination = new Destination();
+        $destination->name = $request->input('name');
+        $destination->description = $request->input('description');
+        $destination->coordinate = $request->input('coordinate');
+        $destination->category_id = $request->input('category_id');
 
-        $description->save();
+        $destination->save();
 
         return redirect()->route('destinations');
     }
