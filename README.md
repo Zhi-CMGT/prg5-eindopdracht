@@ -1,3 +1,11 @@
+25-10-2025
+Uitwerken van de reviews in destination-pagina
+Removed:
+-view van reviews
+Added:
+-reviews in DestinationsController show() (destinations/show.blade)
+-reviews plaatsen (ReviewsController store())
+
 23-10-2025
 Uitwerken van de destinations-pagina
 -form(destinations/create.blade)

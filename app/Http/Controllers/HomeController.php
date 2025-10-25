@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\home;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $categories = Category::all();
+        return view('home.index',
+            compact('categories'));
     }
 
     /**
@@ -36,7 +39,7 @@ class HomeController extends Controller
      */
     public function show(Home $home)
     {
-        
+
     }
 
     /**

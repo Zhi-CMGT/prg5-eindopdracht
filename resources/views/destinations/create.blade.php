@@ -1,6 +1,7 @@
 <x-app-layout>
     <form action="{{ route('destinations.store') }}" method="post">
-        @csrf
+        @csrf //Cross-Site Request Forgery voegt automatisch een verborgen token toe aan je formulier ter bescherming
+        van aanvallen.
         <div>
             <label for="">Name: </label>
             <input type="text" name="name" id="name">

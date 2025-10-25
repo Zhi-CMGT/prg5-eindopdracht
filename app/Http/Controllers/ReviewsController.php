@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class ReviewsController extends Controller
 {
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Review $review)
     {
-        return view('categories.show',
-            compact('category'));
+
     }
 
     /**
@@ -21,9 +20,6 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('categories.index',
-            compact('categories'));
 
     }
 
@@ -32,7 +28,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+
     }
 
     /**
@@ -42,28 +38,30 @@ class CategoriesController extends Controller
     {
         //validatie
         $request->validate([
-            'name' => 'required|max:100',
-            'description' => 'required'
+            'content' => 'required|max:1000',
+            'rating' => 'required|integer|min:1|max:5'
         ]);
+
         //errors tonen
         //beveiliging
         //data terugschrijven in de form fields
         //INSERT INTO sql
-        $category = new Category();
-        $category->name = $request->input('name');
-        $category->description = $request->input('description');
-        $category->destination_id = $request->input('destination_id');
+        $review = new Review();
+        $review->user_id = auth()->id();
+        $review->destination_id = $request->input('destination_id');
+        $review->content = $request->input('content');
+        $review->rating = $request->input('rating');
 
-        $category->save();
+        $review->save();
 
-        return redirect()->route('categories');
+        return back();
     }
 
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $categories)
+    public function edit(Review $reviews)
     {
         //
     }
@@ -71,7 +69,7 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $categories)
+    public function update(Request $request, Review $reviews)
     {
         //
     }
@@ -79,7 +77,7 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $categories)
+    public function destroy(Review $reviews)
     {
         //
     }

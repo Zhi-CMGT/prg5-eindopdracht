@@ -26,8 +26,8 @@ Route::get('categories/create', [CategoriesController::class, 'create'])->name('
 Route::get('categories/{category}', [CategoriesController::class, 'show'])->name('categories.show');
 Route::post('categories', [CategoriesController::class, 'store'])->name('categories.store');
 
-//reviews create, show and store
-Route::get('review/{review}', [ReviewsController::class, 'show'])->name('reviews.show');
+//reviews store
+Route::post('destinations/{destination}/reviews', [ReviewsController::class, 'store'])->name('reviews.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

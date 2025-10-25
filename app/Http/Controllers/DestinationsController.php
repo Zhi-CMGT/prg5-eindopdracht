@@ -14,6 +14,8 @@ class DestinationsController extends Controller
      */
     public function show(Destination $destination)
     {
+        $destination->load(['reviews', 'category']);
+
         return view('destinations.show',
             compact('destination'));
     }
@@ -22,7 +24,8 @@ class DestinationsController extends Controller
     {
         $destinations = Destination::all(); //Om alle data op te halen.
         //Destination::find(id:1); Om een specifieke data op te halen.
-        return view('destinations.index', compact('destinations'));
+        return view('destinations.index',
+            compact('destinations'));
     }
 
     /**
@@ -32,7 +35,8 @@ class DestinationsController extends Controller
     {
         $categories = Category::all();
         $reviews = Review::all();
-        return view('destinations.create', compact('categories'));
+        return view('destinations.create',
+            compact('categories', 'reviews'));
     }
 
     /**
@@ -55,10 +59,11 @@ class DestinationsController extends Controller
         $destination->description = $request->input('description');
         $destination->coordinate = $request->input('coordinate');
         $destination->category_id = $request->input('category_id');
+        $destination->review_id = $request->input('review_id');
 
         $destination->save();
 
-        return redirect()->route('destinations');
+        return redirect()->route('destinations.show');
     }
 
     /**
