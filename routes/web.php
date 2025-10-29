@@ -16,12 +16,18 @@ Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::get('destinations', [DestinationsController::class, 'index'])->name('destinations');
 Route::get('categories', [CategoriesController::class, 'index'])->name('categories');
 
-//destinations create, show and store
-Route::get('destinations/create', [DestinationsController::class, 'create'])->name('destinations.create');
+//destinations public
 Route::get('destinations/{destination}', [DestinationsController::class, 'show'])->name('destinations.show');
-Route::post('destinations', [DestinationsController::class, 'store'])->name('destinations.store');
 
-//categories create, show and store
+//destinations admin
+Route::post('destinations', [DestinationsController::class, 'store'])->name('destinations.store');
+Route::get('destinations/create', [DestinationsController::class, 'create'])->name('destinations.create');
+Route::get('destinations/{destination}/edit', [DestinationsController::class, 'edit'])->name('destinations.edit');
+Route::put('destinations/{destination}', [DestinationsController::class, 'update'])->name('destinations.update');
+Route::delete('destinations/{destination}', [DestinationsController::class, 'destroy'])->name('destinations.destroy');
+Route::post('destinations/{destination}/toggle', [DestinationsController::class, 'toggleStatus'])->name('destinations.toggle');
+
+//categories create, show, store
 Route::get('categories/create', [CategoriesController::class, 'create'])->name('categories.create');
 Route::get('categories/{category}', [CategoriesController::class, 'show'])->name('categories.show');
 Route::post('categories', [CategoriesController::class, 'store'])->name('categories.store');

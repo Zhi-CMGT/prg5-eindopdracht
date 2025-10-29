@@ -9,23 +9,35 @@ use Illuminate\Http\Request;
 
 class DestinationsController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        if ($request->user() && $request->user()->isAdmin()) {
+            $destinations = Destination::all();
+
+        } else {
+            $destinations = Destination::active()->get();
+        }
+
+        return view('destinations.index',
+            compact('destinations'));
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function show(Destination $destination)
     {
+        if (!$destination->is_active) {
+            abort(404);
+        }
+
         $destination->load(['reviews', 'category']);
+
+//        $destination = Destination::active()->get();
 
         return view('destinations.show',
             compact('destination'));
-    }
-
-    public function index()
-    {
-        $destinations = Destination::all(); //Om alle data op te halen.
-        //Destination::find(id:1); Om een specifieke data op te halen.
-        return view('destinations.index',
-            compact('destinations'));
     }
 
     /**
@@ -63,30 +75,59 @@ class DestinationsController extends Controller
 
         $destination->save();
 
-        return redirect()->route('destinations.show');
+        return redirect()->route('destinations');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DestinationsController $destinations)
+    public function edit(Destination $destination)
     {
-        //
+        $categories = Category::all();
+        return view('destinations.edit',
+            compact('destination', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DestinationsController $destinations)
+    public function update(Request $request, Destination $destination)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:100',
+            'description' => 'required',
+            'coordinate' => 'required',
+        ]);
+
+        $destination->name = $request->input('name');
+        $destination->description = $request->input('description');
+        $destination->coordinate = $request->input('coordinate');
+        $destination->category_id = $request->input('category_id');
+        $destination->review_id = $request->input('review_id');
+
+        $destination->save();
+
+        return redirect('destinations');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DestinationsController $destinations)
+    public function destroy(Destination $destination)
     {
-        //
+        $destination->delete();
+
+        return redirect()->route('destinations');
+
     }
+
+    public function toggleStatus(Destination $destination)
+    {
+        $destination->is_active = !$destination->is_active;
+
+        $destination->save();
+
+        return redirect()->route('destinations');
+    }
+
 }

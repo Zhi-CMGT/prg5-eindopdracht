@@ -4,9 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 
 class Destination extends Model
 {
+    public function scopeActive(Builder $query)
+    {
+        $query->where('is_active', true);
+    }
 
     public function category(): BelongsTo
     {

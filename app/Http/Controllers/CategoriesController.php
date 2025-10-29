@@ -12,6 +12,10 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
+        $category->load(['destinations' => function ($query) {
+            $query->active();
+        }]);
+
         return view('categories.show',
             compact('category'));
     }

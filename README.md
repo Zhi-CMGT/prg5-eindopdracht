@@ -1,3 +1,13 @@
+28-10-2025
+Uitwerken van de status-destinations-pagina
+-toggle, edit, update en delete (DestinationsController)
+-form van de bewerk-pagina (destinations/edit.blade)
+-statuslijst (destinations/index.blade)
+
+Uitwerken admin-users
+-role toevoeging database Users
+-function admin en users (Users.php)
+
 25-10-2025
 Uitwerken van de reviews in destination-pagina
 Removed:
