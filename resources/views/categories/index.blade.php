@@ -5,6 +5,10 @@
     </x-slot>
 
     <div>
+        <a href="{{ route('categories.create') }}">Add Categories</a>
+    </div>
+
+    <div>
         @foreach($categories as $category)
             <h1>{{$category->name}}</h1>
             <p>{{$category->description}}</p>

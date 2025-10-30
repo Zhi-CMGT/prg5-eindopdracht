@@ -71,15 +71,18 @@ class ReviewsController extends Controller
      */
     public function update(Request $request, Review $reviews)
     {
-        //
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Review $reviews)
+    public function destroy(Review $review)
     {
-        //
+        $destination = $review->destination;
+        $review->delete();
+
+        return redirect()->route('destinations.show', $destination->id);
     }
 
 }

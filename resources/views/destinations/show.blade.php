@@ -31,10 +31,22 @@
             <h2>Reviews</h2>
             @foreach($destination->reviews as $review)
                 <div>
-                    <strong>{{ $review->user->name }}</strong>
-                    <p>{{ $review->content }}</p>
-                    <small> Rating: {{ str_repeat('⭐', $review->rating) }}</small>
+                    <div>
+                        <strong>{{ $review->user->name }}</strong>
+                        <p>{{ $review->content }}</p>
+                        <small> Rating: {{ str_repeat('⭐', $review->rating) }}</small>
+                    </div>
+
+                    <div>
+                        <form action="{{ route('reviews.destroy', $review->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </div>
+
             @endforeach
         </div>
 

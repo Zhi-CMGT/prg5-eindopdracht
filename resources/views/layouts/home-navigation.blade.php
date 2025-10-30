@@ -25,15 +25,58 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('destinations')" :active="request()->routeIs('destinations')">
-                        {{ __('Destinations') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('categories')" :active="request()->routeIs('categories')">
-                        {{ __('Categories') }}
-                    </x-nav-link>
+
+                    <div>
+                        <x-dropdown>
+                            <x-slot name="trigger">
+                                <button>Destinations</button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <a href="{{ route('destinations') }}">See all destinations</a>
+
+                                <div>
+                                    @foreach($destinations as $destination)
+                                        <a href="{{ route('destinations.show', $destination) }}">
+                                            {{ $destination->name }}
+                                        </a>
+                                    @endforeach
+                                </div>
+
+                            </x-slot>
+
+                        </x-dropdown>
+                    </div>
+
+                    <div>
+                        <x-dropdown>
+                            <x-slot name="trigger">
+                                <button>Categories</button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <a href="{{ route('categories') }}">See all categories</a>
+
+                                <div>
+                                    @foreach($categories as $category)
+                                        <a href="{{ route('categories.show', $category) }}">
+                                            {{ $category->name }}</a>
+                                        <div>
+                                            @foreach($category->destinations as $destination)
+                                                <a href="{{ route('destinations.show', $destination) }}">{{ $destination->name }}</a>
+                                            @endforeach
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                            </x-slot>
+
+                        </x-dropdown>
+                    </div>
                 </div>
 
             </div>

@@ -34,8 +34,6 @@ class DestinationsController extends Controller
 
         $destination->load(['reviews', 'category']);
 
-//        $destination = Destination::active()->get();
-
         return view('destinations.show',
             compact('destination'));
     }
@@ -47,6 +45,7 @@ class DestinationsController extends Controller
     {
         $categories = Category::all();
         $reviews = Review::all();
+
         return view('destinations.create',
             compact('categories', 'reviews'));
     }
@@ -115,9 +114,6 @@ class DestinationsController extends Controller
      */
     public function destroy(Destination $destination)
     {
-        $destination->delete();
-
-        return redirect()->route('destinations');
 
     }
 

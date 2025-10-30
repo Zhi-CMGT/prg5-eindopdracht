@@ -24,6 +24,7 @@
         </div>
 
         <div>
+            <a href="{{ route('categories') }}">Go Back</a>
             <button type="submit">Save</button>
         </div>
 

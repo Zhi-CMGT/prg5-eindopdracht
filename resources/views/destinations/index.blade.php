@@ -5,26 +5,33 @@
     </x-slot>
 
     <div>
-        @foreach($destinations as $destination)
-            <h1>{{ $destination->name }}</h1>
-            <p>{{ $destination->is_active ? 'Active' : 'Inactive' }}</p>
+        <div>
+            <a href="{{ route('destinations.create') }}">Add Destinations</a>
+        </div>
 
-            <div>
-                <form action="{{ route('destinations.toggle', $destination) }}" method="POST">
-                    @csrf
-                    <button type="submit">{{ $destination->is_active ? 'Toggle-off' : 'Toggle-on' }}</button>
-                </form>
+        <x-dropdown>
+            <x-slot name="trigger">
+                <button>Manage</button>
+            </x-slot>
 
-                <a href="{{ route('destinations.edit', $destination) }}" class="btn btn-sm">Edit</a>
+            <x-slot name="content">
+                @foreach($destinations as $destination)
+                    <h1>{{ $destination->name }}</h1>
+                    <p>{{ $destination->is_active ? 'Active' : 'Inactive' }}</p>
 
-                <form action="{{ route('destinations.destroy', $destination->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
+                    <div>
+                        <form action="{{ route('destinations.toggle', $destination) }}" method="POST">
+                            @csrf
+                            <button type="submit">{{ $destination->is_active ? 'Toggle-off' : 'Toggle-on' }}</button>
+                        </form>
 
-                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                </form>
-            </div>
-        @endforeach
+                        <a href="{{ route('destinations.edit', $destination) }}" class="btn btn-sm">Edit</a>
+                    </div>
+                @endforeach
+            </x-slot>
+
+        </x-dropdown>
+
     </div>
 
     <div>

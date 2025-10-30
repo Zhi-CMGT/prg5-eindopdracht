@@ -1,3 +1,14 @@
+29-10-2025
+Removed:
+-delete function DestinationsController
+
+Added:
+-delete function ReviewsController
+
+Uitwerken van de dropdown en zoekfilter
+-dropdown (AppServiceProvider.php + home.navigation.blade)
+-zoekfilter (SearchController)
+
 28-10-2025
 Uitwerken van de status-destinations-pagina
 -toggle, edit, update en delete (DestinationsController)
