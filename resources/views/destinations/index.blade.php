@@ -4,35 +4,36 @@
         "Find your next stop in ZheJiang."
     </x-slot>
 
-    <div>
+    @can('isAdmin')
         <div>
-            <a href="{{ route('destinations.create') }}">Add Destinations</a>
+            <div>
+                <a href="{{ route('destinations.create') }}">Add Destinations</a>
+            </div>
+
+            <x-dropdown>
+                <x-slot name="trigger">
+                    <button>Manage</button>
+                </x-slot>
+
+                <x-slot name="content">
+                    @foreach($destinations as $destination)
+                        <h1>{{ $destination->name }}</h1>
+                        <p>{{ $destination->is_active ? 'Active' : 'Inactive' }}</p>
+
+                        <div>
+                            <form action="{{ route('destinations.toggle', $destination) }}" method="POST">
+                                @csrf
+                                <button
+                                    type="submit">{{ $destination->is_active ? 'Toggle-off' : 'Toggle-on' }}</button>
+                            </form>
+
+                            <a href="{{ route('destinations.edit', $destination) }}" class="btn btn-sm">Edit</a>
+                        </div>
+                    @endforeach
+                </x-slot>
+            </x-dropdown>
         </div>
-
-        <x-dropdown>
-            <x-slot name="trigger">
-                <button>Manage</button>
-            </x-slot>
-
-            <x-slot name="content">
-                @foreach($destinations as $destination)
-                    <h1>{{ $destination->name }}</h1>
-                    <p>{{ $destination->is_active ? 'Active' : 'Inactive' }}</p>
-
-                    <div>
-                        <form action="{{ route('destinations.toggle', $destination) }}" method="POST">
-                            @csrf
-                            <button type="submit">{{ $destination->is_active ? 'Toggle-off' : 'Toggle-on' }}</button>
-                        </form>
-
-                        <a href="{{ route('destinations.edit', $destination) }}" class="btn btn-sm">Edit</a>
-                    </div>
-                @endforeach
-            </x-slot>
-
-        </x-dropdown>
-
-    </div>
+    @endcan
 
     <div>
         @foreach($destinations as $destination)

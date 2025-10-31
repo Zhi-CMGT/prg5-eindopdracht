@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CategoriesController extends Controller
 {
@@ -34,8 +36,17 @@ class CategoriesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Category $category)
     {
+        Gate::define('create-category', function (User $user, Category $category) {
+            return $category->is($user);
+        });
+
+        if (Auth::guest()) {
+            return redirect('login');
+        }
+
+
         return view('categories.create');
     }
 

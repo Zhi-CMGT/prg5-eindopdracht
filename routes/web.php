@@ -5,11 +5,12 @@ use App\Http\Controllers\DestinationsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 //index
 Route::get('home', [HomeController::class, 'index'])->name('home');
@@ -37,16 +38,20 @@ Route::middleware(['auth'])->group(function () {
 //categories public
 Route::get('categories/{category}', [CategoriesController::class, 'show'])->name('categories.show');
 
-//reviews store
-Route::post('destinations/{destination}/reviews', [ReviewsController::class, 'store'])->name('reviews.store');
+//reviews admin
 Route::delete('reviews/{review}', [ReviewsController::class, 'destroy'])->name('reviews.destroy');
+
+//reviews public
+Route::post('destinations/{destination}/reviews', [ReviewsController::class, 'store'])->name('reviews.store');
+
+//search
+Route::get('search', [SearchController::class, 'search'])->name('search');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

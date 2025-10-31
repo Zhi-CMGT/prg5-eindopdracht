@@ -1,50 +1,74 @@
 <x-app-layout>
-    <form action="{{ route('destinations.update', $destination) }}" method="POST">
-        @csrf
-        @method('PUT')
+    @can('isAdmin')
+        <form action="{{ route('destinations.update', $destination) }}" method="POST">
+            @csrf
+            @method('PUT')
 
-        <div>
-            <label for="">Name: </label>
-            <input type="text" name="name" id="name" value="{{old('name', $destination->name)}}">
+            <div class="space-y-8">
+                <div class="border-b border-gray-900/10 pb-12">
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">
+                        Edit Destination</h2>
 
-            @error('name')
-            <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
-        </div>
+                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <x-form-field>
+                            <x-form-label for="">Name:</x-form-label>
 
-        <div>
-            <label for="">Coordinate: </label>
-            <input type="text" name="coordinate" id="coordinate"
-                   value="{{old('coordinate', $destination->coordinate)}}">
+                            <x-form-input
+                                type="text"
+                                name="name"
+                                id="name"
+                                value="{{old('name', $destination->name)}}"
+                                required/>
 
-            @error('coordinate')
-            <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
-        </div>
+                            <x-form-error name="name"/>
+                        </x-form-field>
 
-        <div>
-            <p>Category: </p>
-            <select name="category_id" id="category_id">
-                @foreach($categories as $category)
-                    <option
-                        value="{{ $category->id }}"
-                        {{ $destination->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
+                        <x-form-field>
+                            <x-form-label for="">Coordinate:</x-form-label>
 
-        <div>
-            <label for="">Description: </label>
-            <input type="text" name="description" id="description"
-                   value="{{old('description', $destination->description)}}">
+                            <x-form-input
+                                type="text"
+                                name="coordinate"
+                                id="coordinate"
+                                value="{{old('coordinate', $destination->coordinate)}}"
+                                required/>
 
-            @error('description')
-            <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
-        </div>
+                            <x-form-error name="coordinate"/>
+                        </x-form-field>
 
-        <div>
-            <button type="submit">Update</button>
-        </div>
-    </form>
+                        <x-form-field>
+                            <x-form-label>Category:</x-form-label>
+
+                            <select name="category_id" id="category_id">
+                                @foreach($categories as $category)
+                                    <option
+                                        value="{{ $category->id }}"
+                                        {{ $destination->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </x-form-field>
+
+                        <x-form-field>
+                            <x-form-label for="">Description:</x-form-label>
+
+                            <x-form-input
+                                type="text"
+                                name="description"
+                                id="description"
+                                value="{{old('description', $destination->description)}}"
+                                required/>
+
+                            <x-form-error name="description"/>
+                        </x-form-field>
+
+                        <x-form-field>
+                            <a href="{{ url()->previous() }}"
+                               class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
+                            <x-form-button>Update</x-form-button>
+                        </x-form-field>
+                    </div>
+                </div>
+            </div>
+        </form>
+    @endcan
 </x-app-layout>

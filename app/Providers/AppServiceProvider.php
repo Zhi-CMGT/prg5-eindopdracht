@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Destination;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::define('isAdmin', function ($user) {
+            return $user->isAdmin();
+        });
+
         View::composer('layouts.home-navigation', function ($view) {
             $categories = Category::with(['destinations' => function ($query) {
                 $query->active();

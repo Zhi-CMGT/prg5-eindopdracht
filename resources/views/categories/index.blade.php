@@ -4,9 +4,11 @@
         "Find your perfect ZheJiang experience."
     </x-slot>
 
-    <div>
-        <a href="{{ route('categories.create') }}">Add Categories</a>
-    </div>
+    @can('isAdmin')
+        <div>
+            <a href="{{ route('categories.create') }}">Add Categories</a>
+        </div>
+    @endcan
 
     <div>
         @foreach($categories as $category)

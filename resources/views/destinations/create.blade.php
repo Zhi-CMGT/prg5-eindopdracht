@@ -1,54 +1,66 @@
 <x-app-layout>
-    <form action="{{ route('destinations.store') }}" method="post">
-        @csrf
-        {{--        Cross-Site Request Forgery voegt automatisch een verborgen token toe aan je formulier ter bescherming--}}
-        {{--        van aanvallen.--}}
-        <div>
-            <label for="">Name: </label>
-            <input type="text" name="name" id="name">
+    @can('isAdmin')
+        <form action="{{ route('destinations.store') }}" method="post">
+            @csrf
+            {{--        Cross-Site Request Forgery voegt automatisch een verborgen token toe aan je formulier ter bescherming--}}
+            {{--        van aanvallen.--}}
 
-            <input type="submit" name="submit" value="{{old('name')}}">
+            <div class="space-y-8">
+                <div class="border-b border-gray-900/10 pb-12">
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">Create a New Destination</h2>
 
-            @error('name')
-            <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
-        </div>
+                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <x-form-field>
+                            <x-form-label for="name">Name:</x-form-label>
 
-        <div>
-            <label for="">Coordinate: </label>
-            <input type="text" name="coordinate" id="coordinate">
+                            <div class="mt-2">
+                                <x-form-input name="name" id="name" value="{{old('name')}}" required/>
 
-            <input type="submit" name="submit" value="{{old('coordinate')}}">
+                                <x-form-error name="name"/>
+                            </div>
+                        </x-form-field>
 
-            @error('coordinate')
-            <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
-        </div>
+                        <x-form-field>
+                            <x-form-label for="coordinate">Coordinate:</x-form-label>
 
-        <div>
-            <p>Category: </p>
-            <select name="category_id" id="category_id">
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
+                            <x-form-input type="text" name="coordinate" id="coordinate" value="{{old('coordinate')}}"
+                                          required/>
 
-        <div>
-            <label for="">Description: </label>
-            <input type="text" name="description" id="description">
+                            <x-form-error name="coordinate"/>
+                        </x-form-field>
 
-            <input type="submit" name="submit" value="{{old('description')}}">
+                        <x-form-field>
+                            <x-form-label>Category:</x-form-label>
 
-            @error('description')
-            <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
-        </div>
+                            <select name="category_id" id="category_id">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </x-form-field>
 
-        <div>
-            <a href="{{ route('destinations') }}">Go Back</a>
-            <button type="submit">Save</button>
-        </div>
+                        <x-form-field>
+                            <x-form-label for="">Description:</x-form-label>
 
-    </form>
+                            <x-form-input type="text" name="description" id="description" value="{{old('description')}}"
+                                          required/>
+
+                            <x-form-error name="description"/>
+                        </x-form-field>
+
+                        <x-form-field>
+                            <div class="mt-6 flex items-center justify-between gap-x-6">
+                                <a href="{{ route('destinations') }}"
+                                   class="text-sm font-semibold leading-6 text-gray-900">
+                                    Cancel</a>
+
+                                <x-form-button>Save</x-form-button>
+                            </div>
+                        </x-form-field>
+                    </div>
+                </div>
+            </div>
+        </form>
+    @endcan
+
 </x-app-layout>

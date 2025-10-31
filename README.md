@@ -1,3 +1,12 @@
+30-10-2025
+Uitwerken van de authorize
+-Destinations auth
+-Categories auth
+-Reviews auth
+
+Added:
+-components form
+
 29-10-2025
 Removed:
 -delete function DestinationsController

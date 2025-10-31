@@ -1,32 +1,39 @@
 <x-app-layout>
-    <form action="{{ route('categories.store') }}" method="post">
-        @csrf
-        <div>
-            <label for="">Name: </label>
-            <input type="text" name="name" id="name">
+    @can('isAdmin')
+        <form action="{{ route('categories.store') }}" method="post">
+            @csrf
 
-            <input type="submit" name="submit" value="{{old('name')}}">
+            <div class="space-y-8">
+                <div class="border-b border-gray-900/10 pb-12">
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">Create a New Destination</h2>
 
-            @error('name')
-            <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
-        </div>
+                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-        <div>
-            <label for="">Description: </label>
-            <input type="text" name="description" id="description">
+                        <x-form-field>
+                            <x-form-label for="">Name:</x-form-label>
 
-            <input type="submit" name="submit" value="{{old('description')}}">
+                            <x-form-input type="text" name="name" id="name" value="{{old('name')}}" required/>
 
-            @error('description')
-            <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
-        </div>
+                            <x-form-error name="name"/>
+                        </x-form-field>
 
-        <div>
-            <a href="{{ route('categories') }}">Go Back</a>
-            <button type="submit">Save</button>
-        </div>
+                        <x-form-field>
+                            <x-form-label for="">Description:</x-form-label>
 
-    </form>
+                            <x-form-input type="text" name="description" id="description" value="{{old('description')}}"
+                                          required/>
+
+                            <x-form-error name="description"/>
+                        </x-form-field>
+
+                        <x-form-field>
+                            <a href="{{ route('categories') }}" class="text-sm font-semibold leading-6 text-gray-900">
+                                Cancel</a>
+                            <x-form-button>Save</x-form-button>
+                        </x-form-field>
+                    </div>
+                </div>
+            </div>
+        </form>
+    @endcan
 </x-app-layout>

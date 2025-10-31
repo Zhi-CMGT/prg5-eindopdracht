@@ -38,12 +38,14 @@
                     </div>
 
                     <div>
-                        <form action="{{ route('reviews.destroy', $review->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+                        @can('isAdmin')
+                            <form action="{{ route('reviews.destroy', $review->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
 
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                                <x-form-button>Delete</x-form-button>
+                            </form>
+                        @endcan
                     </div>
                 </div>
 
@@ -54,21 +56,18 @@
 
             <form action="{{ route('reviews.store', $destination->id) }}" method="post">
                 @csrf
+
                 <div>
                     <input type="hidden" name="destination_id" value="{{ $destination->id }}">
 
-                    <label for="content">Comment: </label>
-                    <input type="text" name="content" id="content">
+                    <x-form-label for="content">Comment:</x-form-label>
+                    <x-form-input type="text" name="content" id="content" value="{{old('content')}}"/>
 
-                    <input type="submit" name="submit" value="{{old('content')}}">
-
-                    @error('content')
-                    <div class="alert alert-danger"> {{ $message }}</div>
-                    @enderror
+                    <x-form-error name="content"/>
                 </div>
 
                 <div>
-                    <p>Rating:</p>
+                    <x-form-label>Rating:</x-form-label>
                     @for($i = 1; $i <= 5; $i++)
                         <label for="rating{{ $i }}">{{ str_repeat('⭐', $i) }}</label>
                         <input type="radio" name="rating" id="rating{{ $i }}" value="{{ $i }}">
@@ -76,7 +75,7 @@
                 </div>
 
                 <div>
-                    <button type="submit">Confirm</button>
+                    <x-form-button>Confirm</x-form-button>
                 </div>
 
             </form>

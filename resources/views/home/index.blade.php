@@ -2,6 +2,8 @@
     <x-slot name="header">
         <a href="{{ route('destinations') }}">Explore</a>
     </x-slot>
+
+
     <div>
         <p>Step into the world of Zhejiang, a province full of contrasts where centuries-old traditions meet modern
             energy. Wander through ancient water towns, climb misty mountains, and savor the flavors of authentic
