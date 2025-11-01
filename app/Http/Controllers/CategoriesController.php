@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class CategoriesController extends Controller
 {
@@ -30,23 +28,13 @@ class CategoriesController extends Controller
         $categories = Category::all();
         return view('categories.index',
             compact('categories'));
-
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Category $category)
+    public function create()
     {
-        Gate::define('create-category', function (User $user, Category $category) {
-            return $category->is($user);
-        });
-
-        if (Auth::guest()) {
-            return redirect('login');
-        }
-
-
         return view('categories.create');
     }
 
@@ -55,15 +43,11 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //validatie
         $request->validate([
             'name' => 'required|max:100',
             'description' => 'required'
         ]);
-        //errors tonen
-        //beveiliging
-        //data terugschrijven in de form fields
-        //INSERT INTO sql
+
         $category = new Category();
         $category->name = $request->input('name');
         $category->description = $request->input('description');
@@ -74,21 +58,32 @@ class CategoriesController extends Controller
         return redirect()->route('categories');
     }
 
-
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $categories)
+    public function edit(Category $category)
     {
-        //
+        return view('categories.edit',
+            compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $categories)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:100',
+            'description' => 'required'
+        ]);
+
+        $category->name = $request->input('name');
+        $category->description = $request->input('description');
+        $category->destination_id = 1;
+
+        $category->save();
+
+        return redirect()->route('categories');
     }
 
     /**

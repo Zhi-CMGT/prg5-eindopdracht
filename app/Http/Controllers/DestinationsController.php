@@ -55,16 +55,12 @@ class DestinationsController extends Controller
      */
     public function store(Request $request)
     {
-        //validatie
         $request->validate([
             'name' => 'required|max:100',
             'description' => 'required',
             'coordinate' => 'required',
         ]);
-        //errors tonen
-        //beveiliging
-        //data terugschrijven in de form fields
-        //INSERT INTO sql
+
         $destination = new Destination();
         $destination->name = $request->input('name');
         $destination->description = $request->input('description');
@@ -72,6 +68,7 @@ class DestinationsController extends Controller
         $destination->category_id = $request->input('category_id');
         $destination->review_id = $request->input('review_id');
 
+        $destination->is_active = true;
         $destination->save();
 
         return redirect()->route('destinations');

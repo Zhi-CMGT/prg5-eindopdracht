@@ -31,8 +31,10 @@ Route::get('destinations/{destination}', [DestinationsController::class, 'show']
 
 //categories admin
 Route::middleware(['auth'])->group(function () {
-    Route::get('categories/create', [CategoriesController::class, 'create'])->name('categories.create');
     Route::post('categories', [CategoriesController::class, 'store'])->name('categories.store');
+    Route::get('categories/create', [CategoriesController::class, 'create'])->name('categories.create');
+    Route::get('categories/{category}/edit', [CategoriesController::class, 'edit'])->name('categories.edit');
+    Route::put('categories/{category}', [CategoriesController::class, 'update'])->name('categories.update');
 })->middleware('can:isAdmin');
 
 //categories public

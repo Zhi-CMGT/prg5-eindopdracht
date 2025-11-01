@@ -1,3 +1,16 @@
+31-10-2025
+Uitwerken van de zoekfilter
+-SearchController
+-Zoekoptie (home/index.blade)
+
+Bijwerken van de authorize
+-@auth en @guest in home-navigation.blade
+
+Added:
+-categories edit-blade
+
+!Tailwind door claude
+
 30-10-2025
 Uitwerken van de authorize
 -Destinations auth
