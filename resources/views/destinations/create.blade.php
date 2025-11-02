@@ -81,32 +81,29 @@
                     <div class="space-y-6">
                         <!-- Name -->
                         <x-form-field>
-                            <x-form-label for="name" class="text-[#4A7856] font-semibold text-lg mb-2 block">
-                                Destination Name
-                            </x-form-label>
+                            <x-form-label for="name">Destination Name</x-form-label>
+
                             <x-form-input name="name" id="name" value="{{old('name')}}" required
-                                          placeholder="e.g., West Lake, Wuzhen Water Town"
-                                          class="w-full border-[#A6B8B0]/50 rounded-xl py-3 px-4 focus:ring-2 focus:ring-[#4A7856] focus:border-transparent transition"/>
+                                          placeholder="e.g., West Lake, Wuzhen Water Town"/>
+
                             <x-form-error name="name"/>
                         </x-form-field>
 
                         <!-- Coordinate -->
                         <x-form-field>
-                            <x-form-label for="coordinate" class="text-[#4A7856] font-semibold text-lg mb-2 block">
-                                Coordinates
-                            </x-form-label>
+                            <x-form-label for="coordinate">Coordinates</x-form-label>
+
                             <x-form-input type="text" name="coordinate" id="coordinate" value="{{old('coordinate')}}"
                                           required
-                                          placeholder="30.2489, 120.1644"
-                                          class="w-full border-[#A6B8B0]/50 rounded-xl py-3 px-4 focus:ring-2 focus:ring-[#4A7856] focus:border-transparent transition"/>
+                                          placeholder="30.2489, 120.1644"/>
+
                             <x-form-error name="coordinate"/>
                         </x-form-field>
 
                         <!-- Category -->
                         <x-form-field>
-                            <x-form-label for="category_id" class="text-[#4A7856] font-semibold text-lg mb-2 block">
-                                Category
-                            </x-form-label>
+                            <x-form-label for="category_id">Category</x-form-label>
+
                             <select name="category_id" id="category_id"
                                     class="w-full border border-[#A6B8B0]/50 rounded-xl py-3 px-4 focus:ring-2 focus:ring-[#4A7856] focus:border-transparent transition text-[#4A7856]">
                                 @foreach($categories as $category)
@@ -117,13 +114,13 @@
 
                         <!-- Description -->
                         <x-form-field>
-                            <x-form-label for="description" class="text-[#4A7856] font-semibold text-lg mb-2 block">
-                                Description
-                            </x-form-label>
+                            <x-form-label for="description">Description</x-form-label>
+
                             <textarea name="description" id="description" rows="6"
                                       placeholder="Share what makes this destination special..."
                                       class="w-full border border-[#A6B8B0]/50 rounded-xl p-4 focus:ring-2 focus:ring-[#4A7856] focus:border-transparent resize-none transition text-[#4A7856]"
                                       required>{{ old('description') }}</textarea>
+
                             <x-form-error name="description"/>
                         </x-form-field>
 

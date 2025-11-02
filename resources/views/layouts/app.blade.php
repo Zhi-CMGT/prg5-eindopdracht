@@ -16,11 +16,23 @@
 
     <!-- Page Heading -->
     @isset($header)
-        <header class="bg-sunset-orange shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-[#4A7856] to-[#5a8866] py-12 px-4">
+            <header>
                 {{ $header }}
-            </div>
-        </header>
+            </header>
+
+            @isset($h1)
+                <h1 class="text-4xl md:text-5xl font-bold text-white text-center tracking-tight">
+                    {{ $h1 }}
+                </h1>
+            @endisset
+
+            @isset($p)
+                <p class="text-white/80 text-center mt-3 text-lg">
+                    {{ $p }}
+                </p>
+            @endisset
+        </div>
     @endisset
 
     <!-- Page Content -->

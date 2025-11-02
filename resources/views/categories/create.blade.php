@@ -53,23 +53,21 @@
                     <div class="space-y-6">
                         <!-- Name -->
                         <x-form-field>
-                            <x-form-label for="name" class="text-[#4A7856] font-semibold text-lg mb-2 block">
-                                Category Name
-                            </x-form-label>
-                            <x-form-input type="text" name="name" id="name" value="{{old('name')}}" required
-                                          placeholder="e.g., Natural Wonders, Historical Sites"
-                                          class="w-full border-[#A6B8B0]/50 rounded-xl py-3 px-4 focus:ring-2 focus:ring-[#4A7856] focus:border-transparent transition"/>
+                            <x-form-label for="name">Category Name</x-form-label>
+
+                            <x-form-input type="text" name="name" id="name" value="{{old('name')}}" required/>
+
                             <x-form-error name="name"/>
                         </x-form-field>
 
                         <!-- Description -->
                         <x-form-field>
-                            <x-form-label for="description" class="text-[#4A7856] font-semibold text-lg mb-2 block">
-                                Description
-                            </x-form-label>
+                            <x-form-label for="description">Description</x-form-label>
+
                             <textarea name="description" id="description" rows="6" required
                                       placeholder="Describe what types of destinations belong in this category..."
                                       class="w-full border border-[#A6B8B0]/50 rounded-xl p-4 focus:ring-2 focus:ring-[#4A7856] focus:border-transparent resize-none transition text-[#4A7856]">{{ old('description') }}</textarea>
+
                             <x-form-error name="description"/>
                         </x-form-field>
 

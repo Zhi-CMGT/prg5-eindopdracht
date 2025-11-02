@@ -57,13 +57,9 @@
 {{--</x-app-layout>--}}
 <x-app-layout>
     <x-slot name="header">
-        <div class="bg-gradient-to-r from-[#4A7856] to-[#5a8866] py-12 px-4">
-            <h1 class="text-4xl md:text-5xl font-bold text-white text-center tracking-tight">
-                Find your next stop in Zhejiang
-            </h1>
-            <p class="text-white/80 text-center mt-3 text-lg">Discover the hidden gems of beautiful Zhejiang
-                province</p>
-        </div>
+        <x-slot name="h1">Find your next stop in Zhejiang</x-slot>
+
+        <x-slot name="p">Discover the hidden gems of beautiful Zhejiang province</x-slot>
     </x-slot>
 
     @can('isAdmin')
@@ -178,18 +174,30 @@
             @endforeach
         </div>
 
-        @if($destinations->isEmpty())
-            <div class="text-center py-16">
-                <svg class="w-24 h-24 mx-auto text-[#4A7856]/20 mb-4" fill="none" stroke="currentColor"
-                     viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <h3 class="text-2xl font-bold text-[#4A7856] mb-2">No destinations yet</h3>
-                <p class="text-[#4A7856]/60">Start adding amazing destinations to showcase Zhejiang's beauty!</p>
-            </div>
-        @endif
+        <div class="mt-12 text-center">
+            @if(request()->routeIs('search'))
+                <a href="{{ route('home') }}"
+                   class="inline-flex items-center gap-2 text-[#D6B36A] hover:text-[#4A7856] font-semibold transition-colors text-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    Go Back</a>
+            @endif
+        </div>
+
+        {{--        @if($destinations->isEmpty())--}}
+        {{--            <div class="text-center py-16">--}}
+        {{--                <svg class="w-24 h-24 mx-auto text-[#4A7856]/20 mb-4" fill="none" stroke="currentColor"--}}
+        {{--                     viewBox="0 0 24 24">--}}
+        {{--                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
+        {{--                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>--}}
+        {{--                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
+        {{--                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>--}}
+        {{--                </svg>--}}
+        {{--                <h3 class="text-2xl font-bold text-[#4A7856] mb-2">No destinations yet</h3>--}}
+        {{--                <p class="text-[#4A7856]/60">Start adding amazing destinations to showcase Zhejiang's beauty!</p>--}}
+        {{--            </div>--}}
+        {{--        @endif--}}
     </div>
 </x-app-layout>

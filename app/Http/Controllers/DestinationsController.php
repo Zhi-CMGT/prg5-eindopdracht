@@ -9,38 +9,28 @@ use Illuminate\Http\Request;
 
 class DestinationsController extends Controller
 {
-
     public function index(Request $request)
     {
-        if ($request->user() && $request->user()->isAdmin()) {
-            $destinations = Destination::all();
-
-        } else {
-            $destinations = Destination::active()->get();
-        }
+        $destinations = $request->user()?->isAdmin()
+            ? Destination::orderBy('name', 'asc')->get()
+            : Destination::active()->orderBy('name', 'asc')->get();
 
         return view('destinations.index',
             compact('destinations'));
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function show(Destination $destination)
     {
         if (!$destination->is_active) {
             abort(404);
         }
 
-        $destination->load(['reviews', 'category']);
+        $destination->load(['reviews.user', 'category']);
 
         return view('destinations.show',
             compact('destination'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Category::all();
@@ -50,9 +40,6 @@ class DestinationsController extends Controller
             compact('categories', 'reviews'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -65,18 +52,14 @@ class DestinationsController extends Controller
         $destination->name = $request->input('name');
         $destination->description = $request->input('description');
         $destination->coordinate = $request->input('coordinate');
-        $destination->category_id = $request->input('category_id');
-        $destination->review_id = $request->input('review_id');
-
+        $destination->category_id = 1;
         $destination->is_active = true;
+
         $destination->save();
 
         return redirect()->route('destinations');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Destination $destination)
     {
         $categories = Category::all();
@@ -84,34 +67,23 @@ class DestinationsController extends Controller
             compact('destination', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Destination $destination)
+    public function update(Request $request, Destination $destination, Review $review)
     {
         $request->validate([
             'name' => 'required|max:100',
             'description' => 'required',
             'coordinate' => 'required',
+            'category_id' => 'required|exists:categories,id'
         ]);
 
         $destination->name = $request->input('name');
         $destination->description = $request->input('description');
         $destination->coordinate = $request->input('coordinate');
-        $destination->category_id = $request->input('category_id');
-        $destination->review_id = $request->input('review_id');
+        $destination->category_id = 1;
 
         $destination->save();
 
-        return redirect('destinations');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Destination $destination)
-    {
-
+        return redirect()->route('destinations');
     }
 
     public function toggleStatus(Destination $destination)

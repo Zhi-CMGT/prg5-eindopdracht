@@ -8,7 +8,19 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Destination extends Model
 {
-    public function scopeActive(Builder $query): void
+    protected $fillable = [
+        'name',
+        'description',
+        'coordinate',
+        'category_id',
+        'is_active'
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
+
+    public function ScopeActive(Builder $query): void
     {
         $query->where('is_active', true);
     }

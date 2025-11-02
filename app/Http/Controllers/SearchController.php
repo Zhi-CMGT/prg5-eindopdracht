@@ -12,9 +12,26 @@ class SearchController extends Controller
     {
         $search = $request->input('q');
 
-        $destinations = Destination::where('name', 'LIKE', "%{$search}%")->get();
+        if (empty($search)) {
+            return redirect()->back()->withErrors(['error' => 'Please enter a search term!']);
+        }
 
-        return view('destinations.index',
-            compact('destinations'));
+        $destinations = Destination::where('name', 'LIKE', "%{$search}%")->get();
+        $categories = Category::where('name', 'LIKE', "%{$search}%")->get();
+
+        if ($destinations->isNotEmpty()) {
+
+            return view('destinations.index',
+                compact('destinations'));
+
+        } elseif ($categories->isNotEmpty()) {
+
+            return view('categories.index',
+                compact('categories'));
+
+        } else {
+
+            return redirect()->back()->withErrors(['error' => 'No match found!']);
+        }
     }
 }

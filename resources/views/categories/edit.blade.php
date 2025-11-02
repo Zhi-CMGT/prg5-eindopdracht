@@ -64,28 +64,27 @@
                     <div class="space-y-6">
                         <!-- Name -->
                         <x-form-field>
-                            <x-form-label for="name" class="text-[#4A7856] font-semibold text-lg mb-2 block">
-                                Category Name
-                            </x-form-label>
+                            <x-form-label for="name">Category Name</x-form-label>
+
                             <x-form-input type="text" name="name" id="name" value="{{old('name', $category->name)}}"
-                                          required
-                                          class="w-full border-[#A6B8B0]/50 rounded-xl py-3 px-4 focus:ring-2 focus:ring-[#4A7856] focus:border-transparent transition"/>
+                                          required/>
+
                             <x-form-error name="name"/>
                         </x-form-field>
 
                         <!-- Description -->
                         <x-form-field>
-                            <x-form-label for="description" class="text-[#4A7856] font-semibold text-lg mb-2 block">
-                                Description
-                            </x-form-label>
+                            <x-form-label for="description">Description</x-form-label>
+
                             <textarea name="description" id="description" rows="6" required
                                       class="w-full border border-[#A6B8B0]/50 rounded-xl p-4 focus:ring-2 focus:ring-[#4A7856] focus:border-transparent resize-none transition text-[#4A7856]">{{ old('description', $category->description) }}</textarea>
+
                             <x-form-error name="description"/>
                         </x-form-field>
 
                         <!-- Buttons -->
                         <div class="flex justify-between items-center pt-8 border-t border-[#A6B8B0]/30">
-                            <a href="{{ url()->previous() }}"
+                            <a href="{{ route('categories') }}"
                                class="inline-flex items-center gap-2 text-[#4A7856] hover:text-[#D6B36A] font-medium transition-colors">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

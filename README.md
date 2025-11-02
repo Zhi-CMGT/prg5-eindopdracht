@@ -1,3 +1,10 @@
+01-11-2025
+Uitwerken extra validatie->ReviewCooldown
+-Rules ReviewCooldown
+
+Uitbreiding SearchController
+-search op categories
+
 31-10-2025
 Uitwerken van de zoekfilter
 -SearchController

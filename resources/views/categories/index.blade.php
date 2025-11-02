@@ -39,13 +39,11 @@
 
 {{--</x-app-layout>--}}
 <x-app-layout>
+    
     <x-slot name="header">
-        <div class="bg-gradient-to-r from-[#4A7856] to-[#5a8866] py-12 px-4">
-            <h1 class="text-4xl md:text-5xl font-bold text-white text-center tracking-tight">
-                Find your perfect Zhejiang experience
-            </h1>
-            <p class="text-white/80 text-center mt-3 text-lg">Explore destinations by category</p>
-        </div>
+        <x-slot name="h1">Find your perfect Zhejiang experience</x-slot>
+
+        <x-slot name="p">Explore destinations by category</x-slot>
     </x-slot>
 
     @can('isAdmin')

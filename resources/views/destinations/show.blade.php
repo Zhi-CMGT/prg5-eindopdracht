@@ -135,14 +135,33 @@
             </div>
 
             <div class="mt-8 pt-6 border-t border-[#A6B8B0]/30">
-                <a href="{{ url()->previous() }}"
-                   class="inline-flex items-center gap-2 text-[#D6B36A] hover:text-[#4A7856] font-semibold transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-                    </svg>
-                    Go Back
-                </a>
+                @if(url()->previous() == route('destinations'))
+                    <a href="{{ route('destinations') }}"
+                       class="inline-flex items-center gap-2 text-[#D6B36A] hover:text-[#4A7856] font-semibold transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                        </svg>
+                        Go Back</a>
+
+                @elseif(url()->previous() == route('categories'))
+                    <a href="{{ route('categories.show', $destination->category) }}"
+                       class="inline-flex items-center gap-2 text-[#D6B36A] hover:text-[#4A7856] font-semibold transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                        </svg>
+                        Go Back</a>
+
+                @else
+                    <a href="{{ url()->previous() }}"
+                       class="inline-flex items-center gap-2 text-[#D6B36A] hover:text-[#4A7856] font-semibold transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                        </svg>
+                        Go Back</a>
+                @endif
             </div>
         </div>
 
@@ -151,9 +170,10 @@
             <div class="flex items-center justify-between mb-8">
                 <h2 class="text-3xl font-bold text-[#4A7856]">Reviews</h2>
                 <span
+                    {{--                    Toegevoegd door Claude tijdens styling--}}
                     class="text-[#4A7856]/60 text-sm">{{ count($destination->reviews) }} {{ Str::plural('review', count($destination->reviews)) }}</span>
             </div>
-
+            {{----}}
             @if($destination->reviews->isEmpty())
                 <div class="text-center py-12">
                     <svg class="w-16 h-16 mx-auto text-[#4A7856]/20 mb-4" fill="none" stroke="currentColor"
@@ -184,6 +204,7 @@
                                     <form action="{{ route('reviews.destroy', $review->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
+
                                         <button type="submit"
                                                 class="text-red-600 hover:text-red-700 text-sm font-medium transition">
                                             Delete
@@ -208,19 +229,18 @@
                     @csrf
 
                     <div>
-                        <x-form-label for="content" class="text-[#4A7856] font-semibold text-lg mb-2 block">
-                            Your Review
-                        </x-form-label>
+                        <x-form-label for="content">Your Review</x-form-label>
+
                         <textarea name="content" id="content" rows="4"
                                   placeholder="Tell us about your experience..."
                                   class="w-full border border-[#A6B8B0]/50 rounded-xl p-4 focus:ring-2 focus:ring-[#4A7856] focus:border-transparent resize-none transition text-[#4A7856]"></textarea>
+
                         <x-form-error name="content"/>
                     </div>
 
                     <div>
-                        <x-form-label class="text-[#4A7856] font-semibold text-lg mb-3 block">
-                            Rating
-                        </x-form-label>
+                        <x-form-label>Rating</x-form-label>
+
                         <div class="flex items-center gap-3">
                             @for($i = 1; $i <= 5; $i++)
                                 <label for="rating{{ $i }}" class="cursor-pointer group">

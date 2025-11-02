@@ -30,10 +30,12 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('layouts.home-navigation', function ($view) {
             $categories = Category::with(['destinations' => function ($query) {
-                $query->active();
-            }])->get();
+                $query->active()->orderBy('name', 'asc');
+            }])
+                ->orderBy('name', 'asc')
+                ->get();
 
-            $destinations = Destination::active()->get();
+            $destinations = Destination::active()->orderBy('name', 'asc')->get();
 
             $view->with([
                 'destinations' => $destinations,

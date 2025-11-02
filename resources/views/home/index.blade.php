@@ -34,6 +34,7 @@
         <!-- Search Bar -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <form action="{{ route('search') }}" class="max-w-2xl mx-auto">
+
                 <div class="relative group">
                     <span
                         class="absolute inset-y-0 left-5 flex items-center text-[#4A7856]/40 group-focus-within:text-[#4A7856] transition-colors">
@@ -43,10 +44,16 @@
                         </svg>
                     </span>
 
-                    <x-form-input name="q"
-                                  placeholder="Search destinations... (e.g., LiShui, West Lake)"
-                                  class="w-full border-2 border-[#A6B8B0]/30 rounded-2xl pl-16 pr-6 py-5 text-lg focus:ring-2 focus:ring-[#4A7856] focus:border-[#4A7856] shadow-lg"/>
+                    <input name="q"
+                           placeholder="Search destinations... (e.g., LiShui, West Lake)"
+                           class="w-full border-2 border-[#A6B8B0]/30 rounded-2xl pl-16 pr-6 py-5 text-lg focus:ring-2 focus:ring-[#4A7856] focus:border-[#4A7856] shadow-lg"/>
                 </div>
+
+                @if($errors->any())
+                    <div class="text-xs text-red-500 font-semibold mt-1">
+                        {{ $errors->first('error') }}
+                    </div>
+                @endif
             </form>
         </div>
 
