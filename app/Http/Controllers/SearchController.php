@@ -13,6 +13,7 @@ class SearchController extends Controller
         $search = $request->input('q');
 
         if (empty($search)) {
+
             return redirect()->back()->withErrors(['error' => 'Please enter a search term!']);
         }
 

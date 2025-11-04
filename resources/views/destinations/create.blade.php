@@ -93,7 +93,8 @@
                         <x-form-field>
                             <x-form-label for="coordinate">Coordinates</x-form-label>
 
-                            <x-form-input type="text" name="coordinate" id="coordinate" value="{{old('coordinate')}}"
+                            <x-form-input type="text" name="coordinate" id="coordinate"
+                                          value="{{old('coordinate')}}"
                                           required
                                           placeholder="30.2489, 120.1644"/>
 
@@ -146,6 +147,8 @@
                     </div>
                 </form>
             </div>
+        @else
+            @php(abort(403))
         @endcan
     </div>
 </x-app-layout>

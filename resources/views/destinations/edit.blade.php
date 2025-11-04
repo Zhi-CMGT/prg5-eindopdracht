@@ -155,6 +155,9 @@
                     </div>
                 </form>
             </div>
+
+        @else
+            @php(abort(403))
         @endcan
     </div>
 </x-app-layout>
